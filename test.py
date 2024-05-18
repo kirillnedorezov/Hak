@@ -5,7 +5,7 @@ cloudId = 'b1gp7bo4c9nnr8kga380'
 folderId = 'b1g24ict85d7hf6cubru'
 computeDefaultZone = 'ru-central1-a'
 
-url = f'https://compute.api.cloud.yandex.net/compute/v1/instances?folderId={folder_id}&zoneId={compute_default_zone}'
+url = f'https://compute.api.cloud.yandex.net/compute/v1/instances?folderId={folderId}&zoneId={computeDefaultZone}'
 headers = {
     'Authorization': f'Bearer {token}',
 }
