@@ -1,5 +1,6 @@
 import csv
 import json
+import time
 
 from transformers import DistilBertModel, DistilBertTokenizer
 import torch
@@ -15,6 +16,7 @@ def get_embedding(text):
     # Перенос данных на GPU
     inputs = tokenizer(text, return_tensors='pt', padding=True, truncation=True, max_length=128)
     outputs = model(**inputs)
+    print("dd")
     # Возвращение результата на CPU для дальнейшей работы с NumPy
     return outputs.last_hidden_state.mean(dim=1).detach().numpy()
 
@@ -45,9 +47,12 @@ with open("KSR/classification.csv", "r", encoding="utf-8") as file:
 
         database[i] = f"{name} {unit}"
         i += 1
-        if i > 20:
-            break
+
 
 database_embeddings = [get_embedding(text) for text in database]
 with open("KSR/embeddings.json", "w") as json_file:
-    json.dump(database, json_file, ensure_ascii=False, indent=4)
+
+    for item in database_embeddings:
+        print(item)
+        print()
+        #json.dump(database_embeddings, json_file, ensure_ascii=False, indent=4)
